@@ -31,7 +31,6 @@ Describe "Testing the intenetal authorization function:" {
 		It "Supplied username and password:" {
 			Write-Host $env:CBUSERNAME
 			$result = GetCloudberryAuth -APIUser $env:CBUSERNAME -APIpassword $env:CBPASSWORD
-			Write-Host "Test"
 			Write-Host $result
 			$result.access_token | Should -Exist
 		}

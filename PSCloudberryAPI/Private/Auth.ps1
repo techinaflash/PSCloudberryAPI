@@ -1,12 +1,12 @@
 function GetCloudberryAuth ($APIuser,$APIpassword) {
-  Write-Host "APIuser is $($APIuser)"
-  Write-Host "APIpassword is $($APIpassword)"
+  #Write-Host "APIuser is $($APIuser)"
+  #Write-Host "APIpassword is $($APIpassword)"
   $postParams = @{UserName=$APIuser;Password=$APIpassword}
   #@{UserName="matthew@techinaflash.net";Password="Snoqualmie10!"}
   $resp = try {
     #Write-Host 'Invoking web request'
     $R = Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
-    #Write-Host $R.access_token
+    Write-Host $R
     #Set-CloudberryAccessToken -access_token $R.access_token
     #return $R.access_token
   } catch {
