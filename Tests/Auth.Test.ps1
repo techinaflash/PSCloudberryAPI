@@ -6,8 +6,9 @@ Describe "Testing the intenetal authorization function:" {
 
 	InModuleScope GetCloudberryAuth{
 	
-		It "Supplied username and password:" {
-			$result = GetCloudberryAuth -APIUser $env:CBUSERNAME -APIpassword $env:CBPASSWORD
+		It "Supplied username and password, checking access_token exists:" {
+			$result = Get-CloudberryAccessToken -Admin_Username $env:CBUSERNAME -Admin_Password $env:CBPASSWORD
+			$Global:Cloudberry_Access_Token
 			$result.access_token | Should -Not -Be $null
 		}
 	}

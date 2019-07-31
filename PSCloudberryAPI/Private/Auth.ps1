@@ -1,40 +1,48 @@
 function GetCloudberryAuth ($APIuser,$APIpassword) {
-  #Write-Host "APIuser is $($APIuser)"
-  #Write-Host "APIpassword is $($APIpassword)"
+
   $postParams = @{UserName=$APIuser;Password=$APIpassword}
-  #@{UserName="matthew@techinaflash.net";Password="Snoqualmie10!"}
+
   $resp = try {
-    #Write-Host 'Invoking web request'
-    $R = Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
-    #Write-Host $R
-    #Set-CloudberryAccessToken -access_token $R.access_token
-    #return $R.access_token
-	return $R
+	Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
   } catch {
     Write-Host "ERROR! in web request"    
   }  
 }
 
-function CloudberryGetRequest {
-    [CmdletBinding()]
-        Param(
-            [Parameter(Mandatory=$False)]
-            [string]$access_token = $Global:CloudberryAccessToken,
+function Get-CloudberryAccessToken {
+    [cmdletbinding()]
+    Param (
+        [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+        [AllowEmptyString()]
+        [Alias('CloudberryAdminUsername')]
+        [string]$Admin_Username,
+		
+		[Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+        [AllowEmptyString()]
+        [Alias('CloudberryAdminPassword')]
+        [string]$Admin_Password,
+		
+		
+    )
+    if ($Admin_Username -and $Admin_Password) {
+        $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 
-            [Parameter(Mandatory=$True)]
-            [string]$endpoint
-        )
-
-    if (!$access_token) {
-        throw "Access token has not been set. Please use GetCloudberryAuth before calling this function."
-    } else {
-        $Headers = @{
-            Authorization = "Bearer $($access_token)"
-            Accept="application/json"
-        }
-    
-        $Response = Invoke-RestMethod -Method GET -Uri $endpoint -Headers $Headers -ContentType "application/json"
-    
-        return $Response
+		$resp = try {
+			$R = Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
+			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
+			Return $R
+		} catch {
+			Write-Host "ERROR! in web request"    
+		}  
+	}else {
+        Write-Host "Admin username or admin password not supplied to get access token"
+        Exit 1
     }
 }
+
+function Remove-CloudberryAccessToken {
+    Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
+}
+
+New-Alias -Name Set-CloudberryAPIKey -Value Get-CloudberryAccessToken
+New-Alias -Name Add-CloudberryAPIKey -Value Get-CloudberryAccessToken
