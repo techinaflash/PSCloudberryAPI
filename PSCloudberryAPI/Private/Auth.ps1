@@ -19,7 +19,10 @@ function Get-CloudberryAccessToken {
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
 			Return $R
 		} catch {
-			Write-Host "ERROR! in web request"    
+			# Dig into the exception to get the Response details.
+			# Note that value__ is not a typo.
+			Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
+			Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
 		}  
 	}else {
         Write-Host "Admin username or admin password not supplied to get access token"

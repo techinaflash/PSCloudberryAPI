@@ -15,9 +15,16 @@ function CloudberryGetRequest {
             Authorization = "Bearer $($access_token)"
             Accept="application/json"
         }
-        $Response = Invoke-RestMethod -Method GET -Uri $Global:APIBaseURI$endpoint -Headers $Headers -ContentType "application/json"
-    
-        return $Response
+		try {
+			Invoke-RestMethod -Method GET -Uri $Global:APIBaseURI$endpoint -Headers $Headers -ContentType "application/json"
+			return
+		} catch {
+			# Dig into the exception to get the Response details.
+			# Note that value__ is not a typo.
+			Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
+			Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
+		}
+		
     }
 }
 
@@ -48,7 +55,10 @@ function CloudberryPostRequest {
             Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method POST -Body $postParams -headers $headers -ContentType 'application/json'
             return 
         } catch {
-            Write-Host "ERROR! in web request"    
+			# Dig into the exception to get the Response details.
+			# Note that value__ is not a typo.
+			Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
+			Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription   
         }  
     }
 }
