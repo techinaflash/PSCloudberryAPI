@@ -18,3 +18,10 @@ build: false
 #Kick off the CI/CD pipeline
 test_script:
   - ps: . .\build.ps1
+  
+# Install NuGet to interact with the PowerShell Gallery
+install:
+- ps: |
+    Install-PackageProvider -Name NuGet -Force | Out-Null
+    Install-Module -Name Pester -Force
+    Install-Module -Name posh-git -Force
