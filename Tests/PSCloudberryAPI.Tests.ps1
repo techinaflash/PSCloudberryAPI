@@ -1,4 +1,5 @@
 $projectRoot = Resolve-Path "$PSScriptRoot\.."
+Write-Host $projectRoot
 $moduleRoot = Split-Path (Resolve-Path "$projectRoot\*\*.psm1")
 $moduleName = Split-Path $moduleRoot -Leaf
 
