@@ -1,26 +1,13 @@
-function GetCloudberryAuth ($APIuser,$APIpassword) {
-
-  $postParams = @{UserName=$APIuser;Password=$APIpassword}
-
-  $resp = try {
-	Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
-  } catch {
-    Write-Host "ERROR! in web request"    
-  }  
-}
-
 function Get-CloudberryAccessToken {
     [cmdletbinding()]
     Param (
-        [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-        [AllowEmptyString()]
+        [Parameter(Mandatory = $false)]
         [Alias('CloudberryAdminUsername')]
         [string]$Admin_Username,
 		
-		[Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-        [AllowEmptyString()]
+		[Parameter(Mandatory = $false)]
         [Alias('CloudberryAdminPassword')]
-        [string]$Admin_Password,
+        [string]$Admin_Password
 		
 		
     )
@@ -28,7 +15,7 @@ function Get-CloudberryAccessToken {
         $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 
 		$resp = try {
-			$R = Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
+			$R = Invoke-RESTMethod -Uri "$($Global:APIBaseURI)Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
 			Return $R
 		} catch {
