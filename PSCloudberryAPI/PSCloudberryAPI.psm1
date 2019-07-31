@@ -1,8 +1,7 @@
 ﻿#Get public and private function definition files.
-    $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
-    $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
-    $ModuleRoot = $PSScriptRoot
-
+    $Public  = @( Get-ChildItem -Path $PSScriptRoot\PSCloudberryAPI\Public\*.ps1 -ErrorAction SilentlyContinue )
+    $Private = @( Get-ChildItem -Path $PSScriptRoot\PSCloudberryAPI\Private\*.ps1 -ErrorAction SilentlyContinue )
+	Write-Host $Public
 #Dot source the files
     Foreach($import in @($Public + $Private))
     {
