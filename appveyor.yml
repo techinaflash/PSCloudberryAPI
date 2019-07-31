@@ -4,6 +4,11 @@
 environment:
   NuGetApiKey:
     secure: b/JNhR1gU9PguPtCMCdIJbz//PHtWfBBkSxJF7VEfgIBEcDSGZ0JL2yBPFLqmETV
+  CBUSERNAME:
+    secure: T6wKr43pQWdwqW8IZg5OW8GYGU/vGVh5v0rpUlm9tFk=
+  CBPASSWORD:
+    secure: tgn9ii+WdYdNNPvVn1D2KA==
+
 
 # Allow WMF5 (i.e. PowerShellGallery functionality)
 os: WMF 5

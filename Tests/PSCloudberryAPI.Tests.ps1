@@ -1,5 +1,4 @@
 $projectRoot = Resolve-Path "$PSScriptRoot\.."
-Write-Host $projectRoot
 $moduleRoot = Split-Path (Resolve-Path "$projectRoot\*\*.psm1")
 $moduleName = Split-Path $moduleRoot -Leaf
 
@@ -23,4 +22,18 @@ Describe "General project validation: $moduleName" {
     It "Module '$moduleName' can import cleanly" {
         {Import-Module (Join-Path $moduleRoot "$moduleName.psm1") -force } | Should Not Throw
     }
+}
+
+Describe "Testing the intenetal authorization function:" {
+
+	InModuleScope PSCloudberryAPI{
+	
+		It "Supplied username and password:" {
+			Write-Host $env:CBUSERNAME
+			$result = GetCloudberryAuth -APIUser $env:CBUSERNAME -APIpassword $env:CBPASSWORD
+			Write-Host "Test"
+			Write-Host $result
+			$result.access_token | Should -Exist
+		}
+	}
 }
