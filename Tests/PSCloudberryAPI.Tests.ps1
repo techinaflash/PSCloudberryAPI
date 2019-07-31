@@ -26,7 +26,7 @@ Describe "General project validation: $moduleName" {
     }
 }
 
-Describe "Testing the intenetal authorization function:" {
+Describe "Testing the internal authorization function:" {
 
 	InModuleScope PSCloudberryAPI{
 	
