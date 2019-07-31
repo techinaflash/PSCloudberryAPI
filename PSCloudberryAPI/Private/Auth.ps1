@@ -15,7 +15,7 @@ function Get-CloudberryAccessToken {
         $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 		Write-Host $Admin_Username
 		Write-Host $Admin_Password
-		$resp = try {
+		try {
 			$R = Invoke-RESTMethod -Uri "$($Global:APIBaseURI)Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
 			Return $R
