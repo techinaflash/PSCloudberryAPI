@@ -6,9 +6,10 @@ function GetCloudberryAuth ($APIuser,$APIpassword) {
   $resp = try {
     #Write-Host 'Invoking web request'
     $R = Invoke-RESTMethod -Uri "https://api.mspbackups.com/api/Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
-    Write-Host $R
+    #Write-Host $R
     #Set-CloudberryAccessToken -access_token $R.access_token
     #return $R.access_token
+	return $R
   } catch {
     Write-Host "ERROR! in web request"    
   }  
