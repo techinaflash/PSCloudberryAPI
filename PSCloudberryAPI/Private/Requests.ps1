@@ -53,7 +53,7 @@ function CloudberryPostRequest {
             Accept="application/json"
         }
 		
-        $resp = try {
+        try {
             
             if (!$DELETE){
 				#Write-Host 'Invoking POST web request'

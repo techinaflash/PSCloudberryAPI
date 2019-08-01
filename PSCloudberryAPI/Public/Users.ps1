@@ -22,7 +22,7 @@ function CreateCloudberryUser {
             [string]$Company,
 
             [Parameter(Mandatory=$True)]
-            [boolean]$Enabled = $true,
+            [string]$Enabled = $true,
 
             [Parameter(Mandatory=$True)]
 			[ValidateLength(6,100)]

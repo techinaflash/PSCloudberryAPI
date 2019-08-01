@@ -55,9 +55,7 @@ Describe "Testing the internal authorization function:" {
 		}
 		
 		It "Creating test user:" {
-			$result = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled $true 
-			Write-Host $result
-			$result | Should -Not -Be $null
+			CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true' | Should -Not -Be $null
 			
 		}
 		
