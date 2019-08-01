@@ -53,5 +53,17 @@ Describe "Testing the internal authorization function:" {
 		It "Getting Destination for test user:" {
 			GetCloudberryDestination -Email 'matthew@techinaflash.net' | Should -Not -Be $null
 		}
+		
+		It "Creating test user:" {
+			$result = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled $true 
+			Write-Host $result
+			$result | Should -Not -Be $null
+			
+		}
+		
+		It "Removing test user:" {
+			Write-Host $userid
+			RemoveCloudberryUser -ID $userid | Should -Not -Be $null
+		}
 	}
 }

@@ -21,15 +21,15 @@ function CreateCloudberryUser {
             [Parameter(Mandatory=$False)]
             [string]$Company,
 
-            [Parameter(Mandatory=$False)]
-            [boolean]$Enabled = $True,
+            [Parameter(Mandatory=$True)]
+            [boolean]$Enabled = $true,
 
             [Parameter(Mandatory=$True)]
 			[ValidateLength(6,100)]
             [string]$Password,
 
-            [Parameter(Mandatory=$True)]
-            [hashtable]$DestinationList, #AccountID, Destination, PackageID
+            [Parameter(Mandatory=$False)]
+            [hashtable]$DestinationList, #AccountID = string, Destination = string, PackageID =123
 
             [Parameter(Mandatory=$False)]
             [bool]$SendEmailInstruction,
@@ -41,6 +41,19 @@ function CreateCloudberryUser {
 			#CompanySettings 2 User company has it's own licenses activating settings. Can not be changed directly
             [Int]$LicenseManagmentMode
         )
-		Write-Host $PSBoundParameters
 		
+		
+		CloudberryPostRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Users" -postParams $PSBoundParameters
+		#Write-Host 'Create User result'
+		#Write-Host $_
+}
+
+function RemoveCloudberryUser {
+    [CmdletBinding()]
+        Param(
+            [Parameter(Mandatory=$True)]
+            [string]$ID
+		)
+		
+		CloudberryPostRequest -DELETE $true -access_token $Global:Cloudberry_Access_Token -endpoint "Users/$ID/Account" -postParams $PSBoundParameters
 }

@@ -21,6 +21,7 @@ function CloudberryGetRequest {
 		} catch {
 			# Dig into the exception to get the Response details.
 			# Note that value__ is not a typo.
+			Write-Host $_.Exception.Message
 			Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
 			Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
 		}
@@ -38,7 +39,10 @@ function CloudberryPostRequest {
             [string]$endpoint,
 
             [Parameter(Mandatory=$True)]
-            [hashtable]$postParams
+            [hashtable]$postParams,
+			
+			[Parameter(Mandatory=$False)]
+            [bool]$DELETE
         )
 
     if (!$access_token) {
@@ -48,15 +52,21 @@ function CloudberryPostRequest {
             Authorization = "Bearer $($access_token)"
             Accept="application/json"
         }
-
-        #Write-Host $postParams
+		
         $resp = try {
-            #Write-Host 'Invoking web request'
-            Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method POST -Body $postParams -headers $headers -ContentType 'application/json'
+            
+            if (!$DELETE){
+				#Write-Host 'Invoking POST web request'
+				Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method POST -Body ($postParams|ConvertTo-JSON) -headers $headers -ContentType 'application/json'
+			}else{
+				#Write-Host 'Invoking DELETE web request'
+				Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method DELETE -Body ($postParams|ConvertTo-JSON) -headers $headers -ContentType 'application/json'
+			}
             return 
         } catch {
 			# Dig into the exception to get the Response details.
 			# Note that value__ is not a typo.
+			Write-Host $_.Exception.Message
 			Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
 			Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription   
         }  
