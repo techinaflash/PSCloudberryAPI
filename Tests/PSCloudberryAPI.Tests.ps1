@@ -59,10 +59,20 @@ Describe "Testing the internal authorization function:" {
 		}
 		
 		It "Creating test user and removing it:" {
-			$userid = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true' 
-			$userid | Should -Not -Be $null -Because 'could not create test user'
-			
+			$userid = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true'
+			Write-Host $userid			
+			$userid | Should -Match '-' -Because 'could not create test user'
 			RemoveCloudberryUser -ID $userid | Should -Not -Be $null -Because 'could not remove test user'
+		
+		}
+		It "Getting Company List:" {
+			GetCloudberryCompanyList | Should -Not -Be $null
+		}
+		It "Creating test Company and removing it:" {
+			$result = CreateCloudberryCompany -Name 'Test' -StorageLimit 0 -LicenseSettings 2 
+			Write-Host $result
+			$result | Should -Not -Be $null
+			RemoveCloudberryCompany -ID $result | Should -Not -Be $null -Because 'could not remove test company'
 		
 		}
 		
