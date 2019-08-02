@@ -46,6 +46,7 @@ function CreateCloudberryUser {
 		CloudberryPostRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Users" -postParams $PSBoundParameters
 		#Write-Host 'Create User result'
 		#Write-Host $_
+		return
 }
 
 function RemoveCloudberryUser {

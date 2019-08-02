@@ -50,7 +50,7 @@ function CloudberryPostRequest {
     } else {
         $Headers = @{
             Authorization = "Bearer $($access_token)"
-            Accept="application/json"
+            Accept = "application/json"
         }
 		
         try {

@@ -30,20 +30,21 @@ Describe "Testing the internal authorization function:" {
 
 	InModuleScope PSCloudberryAPI{
 	
-		It "Getting CloudberryAccessToken:" {
-			Get-CloudberryAccessToken -Admin_Username $env:CBUSERNAME -Admin_Password $env:CBPASSWORD
-			$Global:Cloudberry_Access_Token | Should -Not -Be $null
-		}
-		
 		It "Removing CloudberryAccessToken:"{
 			Remove-CloudberryAccessToken
 			$Global:Cloudberry_Access_Token | Should -Be $null
 			#resets cloudberry access token so the rest of the tests can commence, maybe move this test to the end
+			#Get-CloudberryAccessToken -Admin_Username $env:CBUSERNAME -Admin_Password $env:CBPASSWORD
+		}
+		
+		It "Getting CloudberryAccessToken:" {
 			Get-CloudberryAccessToken -Admin_Username $env:CBUSERNAME -Admin_Password $env:CBPASSWORD
+			$Global:Cloudberry_Access_Token | Should -Not -Be $null 
 		}
 		
 		It "Getting User List:" {
 			GetCloudberryUserList | Should -Not -Be $null
+			
 		}
 		
 		It "Getting Account List:" {
@@ -54,14 +55,14 @@ Describe "Testing the internal authorization function:" {
 			GetCloudberryDestination -Email 'matthew@techinaflash.net' | Should -Not -Be $null
 		}
 		
-		It "Creating test user:" {
-			CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true' | Should -Not -Be $null
+		It "Creating test user and removing it:" {
+			$userid = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true' 
+			$userid | Should -Not -Be $null -Because 'could not create test user'
 			
+			RemoveCloudberryUser -ID $userid | Should -Not -Be $null -Because 'could not remove test user'
+		
 		}
 		
-		It "Removing test user:" {
-			Write-Host $userid
-			RemoveCloudberryUser -ID $userid | Should -Not -Be $null
-		}
+		
 	}
 }
