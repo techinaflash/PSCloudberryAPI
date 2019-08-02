@@ -75,6 +75,11 @@ Describe "Testing the internal authorization function:" {
 			RemoveCloudberryCompany -ID $result | Should -Not -Be $null -Because 'could not remove test company'
 		
 		}
+		It "Getting Available License List:" {
+			$liceneses = GetCloudberryLicenseList -IsAvailable $true
+			Write-Host $liceneses
+			$liceneses | Should -Not -Be $null
+		}
 		
 		
 	}
