@@ -31,6 +31,9 @@ Describe "Testing the internal authorization function:" {
 	InModuleScope PSCloudberryAPI{
 	
 		It "Removing CloudberryAccessToken:"{
+			If (!$Global:Cloudberry_Access_Token){
+				Set-Variable -Name "Cloudberry_Access_Token" -Value 'test' -Option ReadOnly -Scope global -Force
+			}
 			Remove-CloudberryAccessToken
 			$Global:Cloudberry_Access_Token | Should -Be $null
 			#resets cloudberry access token so the rest of the tests can commence, maybe move this test to the end
