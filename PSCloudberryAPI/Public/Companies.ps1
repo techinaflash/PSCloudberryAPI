@@ -1,9 +1,9 @@
 
-function GetCloudberryCompanyList (){
+function GetCloudberryCompanyList(){
     CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Companies" 
 }
 
-function CreateCloudberryCompany {
+function CreateCloudberryCompany{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]
@@ -27,7 +27,7 @@ function CreateCloudberryCompany {
 		return
 }
 
-function RemoveCloudberryCompany {
+function RemoveCloudberryCompany{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]

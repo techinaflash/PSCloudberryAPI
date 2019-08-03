@@ -9,7 +9,7 @@ Import-Module Psake, BuildHelpers
 
 Set-BuildEnvironment -ErrorAction SilentlyContinue
 Remove-Module PSCloudberryAPI
-import-module $env:BHPSModuleManifest
+uninstall-module PSCloudberryAPI
 Remove-Variable Cloudberry_Access_Token -force
 
 Invoke-psake -buildFile .\psake.ps1 -taskList $Task -nologo

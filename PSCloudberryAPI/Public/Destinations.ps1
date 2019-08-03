@@ -1,4 +1,4 @@
-﻿function GetCloudberryDestination {
+﻿function GetCloudberryDestination{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]
@@ -8,7 +8,7 @@
     CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations/$Email" # | Select -Property 'Destinations'
 }
 
-function AddCloudberryUserDestination {
+function AddCloudberryUserDestination{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]

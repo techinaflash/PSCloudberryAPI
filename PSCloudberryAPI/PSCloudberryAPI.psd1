@@ -12,7 +12,7 @@
 RootModule = 'PSCloudberryAPI.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.12'
+ModuleVersion = '0.0.14'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@ Description = 'PSCloudberryAPI is a powershell wrapper for the Cloudberry API'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('CreateCloudberryUser','GetCloudberryAccountList','GetCloudberryDestination','GetCloudberryPackageList','GetCloudberryUserList')
+FunctionsToExport = @('AddCloudberryUserDestination','CreateCloudberryCompany','CreateCloudberryUser','Get-CloudberryAccessToken','GetCloudberryAccountList','GetCloudberryCompanyList','GetCloudberryDestination','GetCloudberryLicenseList','GetCloudberryPackageList','GetCloudberryUserList','GrantCloudberryLicense','Remove-CloudberryAccessToken','RemoveCloudberryCompany','RemoveCloudberryUser')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'

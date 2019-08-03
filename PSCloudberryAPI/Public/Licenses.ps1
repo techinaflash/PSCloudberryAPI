@@ -1,5 +1,5 @@
 
-function GetCloudberryLicenseList {
+function GetCloudberryLicenseList{
 	[CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]
@@ -7,7 +7,7 @@ function GetCloudberryLicenseList {
 		)
     CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Licenses?/IsAvailable=$IsAvailable" 
 }
-function GrantCloudberryLicense {
+function GrantCloudberryLicense{
 	[CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]

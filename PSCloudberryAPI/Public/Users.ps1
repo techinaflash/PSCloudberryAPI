@@ -1,9 +1,9 @@
 
-function GetCloudberryUserList (){
+function GetCloudberryUserList(){
     CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Users" # | Select -Property 'Destinations'
 }
 
-function CreateCloudberryUser {
+function CreateCloudberryUser{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]
@@ -49,7 +49,7 @@ function CreateCloudberryUser {
 		return
 }
 
-function RemoveCloudberryUser {
+function RemoveCloudberryUser{
     [CmdletBinding()]
         Param(
             [Parameter(Mandatory=$True)]
