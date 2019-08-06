@@ -37,7 +37,7 @@ function Get-CloudberryAccessToken {
 }
 
 function Remove-CloudberryAccessToken {
-	#Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
+	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
     Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
 	Write-Verbose "Removing Cloudberry_Access_Token"
 }
