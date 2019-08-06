@@ -15,8 +15,10 @@ function Get-CloudberryAccessToken {
         $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 		try {
 			$R = Invoke-RESTMethod -Uri "$($Global:APIBaseURI)Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
+			Write-Verbose 'Authorizing Cloudberry user...Setting Cloudberry_Access_Token as Global variable'
+			Write-Verbose "Access Token: $($R.access_token)"
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
-			Return $R
+			#Return $R
 		} catch {
 			# Dig into the exception to get the Response details.
 			# Note that value__ is not a typo.
@@ -33,6 +35,7 @@ function Get-CloudberryAccessToken {
 
 function Remove-CloudberryAccessToken {
     Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
+	Write-Verbose "Removing Cloudberry_Access_Token"
 }
 
 #New-Alias -Name Set-CloudberryAPIKey -Value Get-CloudberryAccessToken
