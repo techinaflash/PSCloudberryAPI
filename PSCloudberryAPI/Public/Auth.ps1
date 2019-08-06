@@ -11,11 +11,14 @@ function Get-CloudberryAccessToken {
 		
 		
     )
+	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
     if ($Admin_Username -and $Admin_Password) {
         $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 		try {
 			$R = Invoke-RESTMethod -Uri "$($Global:APIBaseURI)Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
 			Write-Verbose 'Authorizing Cloudberry user...Setting Cloudberry_Access_Token as Global variable'
+			Write-Verbose "Result is...."
+			Write-Verbose $_
 			Write-Verbose "Access Token: $($R.access_token)"
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
 			#Return $R
@@ -34,6 +37,7 @@ function Get-CloudberryAccessToken {
 }
 
 function Remove-CloudberryAccessToken {
+	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
     Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
 	Write-Verbose "Removing Cloudberry_Access_Token"
 }
