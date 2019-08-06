@@ -60,7 +60,7 @@ Describe "Testing the internal authorization function:" {
 		
 		It "Creating test user and removing it:" {
 			$userid = CreateCloudberryUser -Email 'test@test.com' -Password 'test1234' -Enabled 'true'
-			Write-Host $userid			
+			Write-Verbose "Create User .... UserID: $userid"			
 			$userid | Should -Match '-' -Because 'could not create test user'
 			RemoveCloudberryUser -ID $userid | Should -Not -Be $null -Because 'could not remove test user'
 		
@@ -70,14 +70,14 @@ Describe "Testing the internal authorization function:" {
 		}
 		It "Creating test Company and removing it:" {
 			$result = CreateCloudberryCompany -Name 'Test' -StorageLimit 0 -LicenseSettings 2 
-			Write-Host $result
+			Write-Verbose "Create Company result ... $result"
 			$result | Should -Not -Be $null
 			RemoveCloudberryCompany -ID $result | Should -Not -Be $null -Because 'could not remove test company'
 		
 		}
 		It "Getting Available License List:" {
 			$liceneses = GetCloudberryLicenseList -IsAvailable $true
-			Write-Host $liceneses
+			Write-Verbose "Cloudberry License List ... $liceneses"
 			$liceneses | Should -Not -Be $null
 		}
 		
