@@ -5,7 +5,7 @@
             [string]$Email
 		)
 
-    CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations/$Email" # | Select -Property 'Destinations'
+    CloudberryGetRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations/$Email"
 }
 
 function AddCloudberryUserDestination{
@@ -23,6 +23,7 @@ function AddCloudberryUserDestination{
             [Parameter(Mandatory=$True)]
             [int]$PackagedID
         )
-		Write-Host $PSBoundParameters
+		
+	 CloudberryPostRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations"
 		
 }
