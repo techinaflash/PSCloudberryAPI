@@ -24,6 +24,6 @@ function AddCloudberryUserDestination{
             [int]$PackageID
         )
 		
-	 CloudberryPostRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations"
+	 CloudberryPostRequest -access_token $Global:Cloudberry_Access_Token -endpoint "Destinations" -postParams $PSBoundParameters
 		
 }
