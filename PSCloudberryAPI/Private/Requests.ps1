@@ -7,7 +7,7 @@ function CloudberryGetRequest {
             [Parameter(Mandatory=$True)]
             [string]$endpoint
         )
-	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
+	
     if (!$access_token) {
         throw "Access token has not been set. Please use Get-CloudberryAccessToken before calling this function."
     } else {
@@ -47,7 +47,7 @@ function CloudberryPostRequest {
 			[Parameter(Mandatory=$False)]
             [bool]$DELETE
         )
-	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
+	
     if (!$access_token) {
         throw "Access token has not been set. Please use Get-CloudberryAccessToken before calling this function."
     } else {

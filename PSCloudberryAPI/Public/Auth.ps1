@@ -11,7 +11,7 @@ function Get-CloudberryAccessToken {
 		
 		
     )
-	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
+	
     if ($Admin_Username -and $Admin_Password) {
         $postParams = @{UserName=$Admin_Username;Password=$Admin_Password}
 		try {
@@ -37,7 +37,7 @@ function Get-CloudberryAccessToken {
 }
 
 function Remove-CloudberryAccessToken {
-	#Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState -Name 'VerbosePreference'
+	
     Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
 	Write-Verbose "Removing Cloudberry_Access_Token"
 }
