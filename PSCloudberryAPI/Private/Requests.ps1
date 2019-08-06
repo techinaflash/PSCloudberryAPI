@@ -17,6 +17,7 @@ function CloudberryGetRequest {
         }
 		try {
 			Invoke-RestMethod -Method GET -Uri $Global:APIBaseURI$endpoint -Headers $Headers -ContentType "application/json"
+			Write-Verbose "Made GET request to $($Global:APIBaseURI)$endpoint"
 			return
 		} catch {
 			# Dig into the exception to get the Response details.
@@ -58,9 +59,15 @@ function CloudberryPostRequest {
             if (!$DELETE){
 				#Write-Host 'Invoking POST web request'
 				Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method POST -Body ($postParams|ConvertTo-JSON) -headers $headers -ContentType 'application/json'
+				Write-Verbose "Made POST request to $($Global:APIBaseURI)$endpoint"
+				Write-Verbose "Body parameters are..."
+				Write-Verbose ($postParams|ConvertTo-JSON)
 			}else{
 				#Write-Host 'Invoking DELETE web request'
 				Invoke-RESTMethod -Uri $Global:APIBaseURI$endpoint -Method DELETE -Body ($postParams|ConvertTo-JSON) -headers $headers -ContentType 'application/json'
+				Write-Verbose "Made DELETE request to $($Global:APIBaseURI)$endpoint"
+				Write-Verbose "Body parameters are..."
+				Write-Verbose ($postParams|ConvertTo-JSON)
 			}
             return 
         } catch {
