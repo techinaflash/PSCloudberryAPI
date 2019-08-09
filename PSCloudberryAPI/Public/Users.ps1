@@ -29,7 +29,7 @@ function CreateCloudberryUser{
             [string]$Password,
 
             [Parameter(Mandatory=$False)]
-            [hashtable]$DestinationList, #AccountID = string, Destination = string, PackageID =123
+            [hashtable[]]$DestinationList, #AccountID = string, Destination = string, PackageID =123
 
             [Parameter(Mandatory=$False)]
             [bool]$SendEmailInstruction,
