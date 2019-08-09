@@ -41,6 +41,6 @@ function Remove-CloudberryAccessToken {
     Remove-Variable -Name "Cloudberry_Access_Token" -Scope global -Force
 	Write-Verbose "Removing Cloudberry_Access_Token"
 }
-
+#
 #New-Alias -Name Set-CloudberryAPIKey -Value Get-CloudberryAccessToken
 #New-Alias -Name Add-CloudberryAPIKey -Value Get-CloudberryAccessToken
