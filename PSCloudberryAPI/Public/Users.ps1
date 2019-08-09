@@ -39,7 +39,7 @@ function CreateCloudberryUser{
 			#Manual	0 A user can activate only a limited number of paid licenses
 			#Automatic 1 A user can activate paid licenses from a global pool
 			#CompanySettings 2 User company has it's own licenses activating settings. Can not be changed directly
-            [Int]$LicenseManagmentMode
+            [Int]$LicenseManagementMode
         )
 		
 		
