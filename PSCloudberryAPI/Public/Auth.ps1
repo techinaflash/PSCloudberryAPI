@@ -17,9 +17,8 @@ function Get-CloudberryAccessToken {
 		try {
 			$R = Invoke-RESTMethod -Uri "$($Global:APIBaseURI)Provider/Login" -Method POST -Body $postParams -ContentType 'application/x-www-form-urlencoded'
 			Write-Verbose 'Authorizing Cloudberry user...Setting Cloudberry_Access_Token as Global variable'
-			Write-Verbose "Result is...."
-			Write-Verbose $R
-			Write-Verbose "Access Token: $($R.access_token)"
+			Write-Debug "Result is.... $R"
+			Write-Debug "Access Token: $($R.access_token)"
 			Set-Variable -Name "Cloudberry_Access_Token" -Value $R.access_token -Option ReadOnly -Scope global -Force
 			#Return $R
 		} catch {
